@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Dropshipping Formula - Your Success Blueprint</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chart-line"></i>
+                <span>DropShip Formula</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#calculator" class="nav-link">Calculator</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#suppliers" class="nav-link">Suppliers</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Master Amazon Dropshipping</h1>
+                <p class="hero-subtitle">Calculate profits, find winning products, and scale your business with our comprehensive dropshipping formula</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('calculator')">
+                        <i class="fas fa-calculator"></i>
+                        Start Calculating
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('research')">
+                        <i class="fas fa-search"></i>
+                        Product Research
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Live Profit Tracker</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="profit-display">
+                            <span class="currency">AED</span>
+                            <span class="amount" id="hero-profit">2,450</span>
+                        </div>
+                        <div class="profit-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+15.2% today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profit Calculator Section -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Profit Calculator</h2>
+                <p>Calculate your potential profits with precision using Dirham currency</p>
+            </div>
+            
+            <div class="calculator-grid">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="product-cost">Product Cost (AED)</label>
+                        <div class="input-group">
+                            <span class="input-prefix">AED</span>
+                            <input type="number" id="product-cost" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="selling-price">Selling Price (AED)</label>
+                        <div class="input-group">
+                            <span class="input-prefix">AED</span>
+                            <input type="number" id="selling-price" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shipping-cost">Shipping Cost (AED)</label>
+                        <div class="input-group">
+                            <span class="input-prefix">AED</span>
+                            <input type="number" id="shipping-cost" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amazon-fees">Amazon Fees (%)</label>
+                        <div class="input-group">
+                            <input type="number" id="amazon-fees" placeholder="15" step="0.1" max="100">
+                            <span class="input-suffix">%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ad-spend">Ad Spend (AED)</label>
+                        <div class="input-group">
+                            <span class="input-prefix">AED</span>
+                            <input type="number" id="ad-spend" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" placeholder="1" min="1" value="1">
+                    </div>
+                    
+                    <button class="btn btn-primary btn-full" onclick="calculateProfit()">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Profit
+                    </button>
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="result-card">
+                        <h3>Profit Breakdown</h3>
+                        <div class="result-item">
+                            <span>Revenue:</span>
+                            <span class="result-value" id="revenue">AED 0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Total Costs:</span>
+                            <span class="result-value" id="total-costs">AED 0.00</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <span>Net Profit:</span>
+                            <span class="result-value" id="net-profit">AED 0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Profit Margin:</span>
+                            <span class="result-value" id="profit-margin">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span>ROI:</span>
+                            <span class="result-value" id="roi">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-chart">
+                        <canvas id="profitChart" width="300" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Research Section -->
+    <section id="research" class="research-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Product Research Tools</h2>
+                <p>Find winning products with our advanced research tools</p>
+            </div>
+            
+            <div class="research-tools">
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Keyword Research</h3>
+                    <div class="search-box">
+                        <input type="text" id="keyword-input" placeholder="Enter product keyword...">
+                        <button class="search-btn" onclick="searchKeywords()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="keyword-results" id="keyword-results"></div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-trending-up"></i>
+                    </div>
+                    <h3>Trend Analysis</h3>
+                    <div class="trend-filters">
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                            <option value="beauty">Beauty</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="analyzeTrends()">Analyze</button>
+                    </div>
+                    <div class="trend-results" id="trend-results"></div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Product Scorer</h3>
+                    <div class="scorer-inputs">
+                        <input type="text" id="product-url" placeholder="Amazon product URL...">
+                        <button class="btn btn-primary" onclick="scoreProduct()">Score Product</button>
+                    </div>
+                    <div class="score-results" id="score-results"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supplier Finder Section -->
+    <section id="suppliers" class="suppliers-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Supplier Network</h2>
+                <p>Connect with reliable suppliers for your dropshipping business</p>
+            </div>
+            
+            <div class="supplier-grid">
+                <div class="supplier-card">
+                    <div class="supplier-header">
+                        <img src="https://via.placeholder.com/60x60?text=AL" alt="AliExpress" class="supplier-logo">
+                        <div class="supplier-info">
+                            <h3>AliExpress</h3>
+                            <div class="supplier-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supplier-stats">
+                        <div class="stat">
+                            <span class="stat-label">Products:</span>
+                            <span class="stat-value">100M+</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Avg. Shipping:</span>
+                            <span class="stat-value">7-15 days</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Min. Order:</span>
+                            <span class="stat-value">1 piece</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline">Connect</button>
+                </div>
+                
+                <div class="supplier-card">
+                    <div class="supplier-header">
+                        <img src="https://via.placeholder.com/60x60?text=DH" alt="DHgate" class="supplier-logo">
+                        <div class="supplier-info">
+                            <h3>DHgate</h3>
+                            <div class="supplier-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>4.2/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supplier-stats">
+                        <div class="stat">
+                            <span class="stat-label">Products:</span>
+                            <span class="stat-value">40M+</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Avg. Shipping:</span>
+                            <span class="stat-value">5-12 days</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Min. Order:</span>
+                            <span class="stat-value">1 piece</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline">Connect</button>
+                </div>
+                
+                <div class="supplier-card">
+                    <div class="supplier-header">
+                        <img src="https://via.placeholder.com/60x60?text=1688" alt="1688" class="supplier-logo">
+                        <div class="supplier-info">
+                            <h3>1688.com</h3>
+                            <div class="supplier-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>4.8/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supplier-stats">
+                        <div class="stat">
+                            <span class="stat-label">Products:</span>
+                            <span class="stat-value">50M+</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Avg. Shipping:</span>
+                            <span class="stat-value">3-7 days</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Min. Order:</span>
+                            <span class="stat-value">Varies</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline">Connect</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard -->
+    <section id="analytics" class="analytics-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Analytics Dashboard</h2>
+                <p>Track your dropshipping performance and optimize for success</p>
+            </div>
+            
+            <div class="analytics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Total Revenue</h3>
+                        <div class="metric-value">AED <span id="total-revenue">12,450</span></div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+8.2%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Net Profit</h3>
+                        <div class="metric-value">AED <span id="total-profit">3,240</span></div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.5%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Orders</h3>
+                        <div class="metric-value"><span id="total-orders">156</span></div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+5.1%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Profit Margin</h3>
+                        <div class="metric-value"><span id="avg-margin">26.1</span>%</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+2.3%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="revenueChart" width="800" height="400"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-chart-line"></i>
+                        <span>DropShip Formula</span>
+                    </div>
+                    <p>Your complete solution for Amazon dropshipping success with advanced tools and analytics.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li><a href="#calculator">Profit Calculator</a></li>
+                        <li><a href="#research">Product Research</a></li>
+                        <li><a href="#suppliers">Supplier Network</a></li>
+                        <li><a href="#analytics">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DropShip Formula. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
