@@ -262,6 +262,40 @@ section {
     margin: 0 auto;
 }
 
+.currency-selector {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.currency-selector label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.currency-selector select {
+    padding: 8px 15px;
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+    background: white;
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.currency-selector select:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.currency-selector select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
 /* Calculator Section */
 .calculator-section {
     background: white;
@@ -746,6 +780,15 @@ select:focus {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+
+    .currency-selector {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .currency-selector select {
+        width: 150px;
     }
 
     .trend-filters {

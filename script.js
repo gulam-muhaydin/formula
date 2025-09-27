@@ -1,6 +1,23 @@
 // Global variables
 let profitChart = null;
 let revenueChart = null;
+let currentCurrency = 'USD';
+
+// Currency configurations
+const currencyConfig = {
+    USD: {
+        symbol: '$',
+        code: 'USD',
+        name: 'US Dollar',
+        exchangeRate: 1 // Base currency
+    },
+    AED: {
+        symbol: 'د.إ',
+        code: 'AED',
+        name: 'UAE Dirham',
+        exchangeRate: 3.67 // 1 USD = 3.67 AED (approximate)
+    }
+};
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -60,6 +77,12 @@ function setupEventListeners() {
             input.addEventListener('input', debounce(calculateProfit, 300));
         }
     });
+
+    // Currency selector event listener
+    const currencySelect = document.getElementById('currency-select');
+    if (currencySelect) {
+        currencySelect.addEventListener('change', changeCurrency);
+    }
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -163,9 +186,76 @@ function updateResultDisplay(elementId, value) {
     }, 200);
 }
 
-// Format currency in AED
+// Format currency based on current selection
 function formatCurrency(amount) {
-    return 'AED ' + Math.abs(amount).toFixed(2);
+    const config = currencyConfig[currentCurrency];
+    const convertedAmount = Math.abs(amount) * config.exchangeRate;
+    return config.symbol + convertedAmount.toFixed(2);
+}
+
+// Change currency function
+function changeCurrency() {
+    const currencySelect = document.getElementById('currency-select');
+    currentCurrency = currencySelect.value;
+    
+    // Update all currency symbols and codes in the UI
+    updateCurrencyDisplay();
+    
+    // Recalculate with new currency
+    calculateProfit();
+    
+    // Update analytics with new currency
+    updateAnalyticsCurrency();
+}
+
+// Update currency display throughout the UI
+function updateCurrencyDisplay() {
+    const config = currencyConfig[currentCurrency];
+    
+    // Update currency symbols
+    document.querySelectorAll('.currency-symbol').forEach(element => {
+        element.textContent = config.symbol;
+    });
+    
+    // Update currency codes
+    document.querySelectorAll('.currency-code').forEach(element => {
+        element.textContent = config.code;
+    });
+    
+    // Update hero currency
+    const heroCurrency = document.querySelector('.hero .currency');
+    if (heroCurrency) {
+        heroCurrency.textContent = config.symbol;
+    }
+}
+
+// Update analytics currency
+function updateAnalyticsCurrency() {
+    const config = currencyConfig[currentCurrency];
+    
+    // Update revenue
+    const revenueElement = document.getElementById('total-revenue');
+    if (revenueElement) {
+        const baseValue = 12450; // Base USD value
+        const convertedValue = Math.floor(baseValue * config.exchangeRate);
+        revenueElement.textContent = convertedValue.toLocaleString();
+    }
+    
+    // Update profit
+    const profitElement = document.getElementById('total-profit');
+    if (profitElement) {
+        const baseValue = 3240; // Base USD value
+        const convertedValue = Math.floor(baseValue * config.exchangeRate);
+        profitElement.textContent = convertedValue.toLocaleString();
+    }
+    
+    // Update hero profit
+    const heroProfitElement = document.getElementById('hero-profit');
+    if (heroProfitElement) {
+        const baseValue = 2450; // Base USD value
+        const convertedValue = Math.floor(baseValue * config.exchangeRate);
+        heroProfitElement.textContent = convertedValue.toLocaleString();
+    }
 }
 
 // Initialize charts
@@ -320,10 +410,12 @@ function drawRevenueChart(ctx) {
     
     // Draw y-axis labels
     ctx.textAlign = 'right';
+    const config = currencyConfig[currentCurrency];
     for (let i = 0; i <= 5; i++) {
         const value = (maxValue / 5) * (5 - i);
+        const convertedValue = Math.round(value * config.exchangeRate);
         const y = padding + (chartHeight / 5) * i;
-        ctx.fillText('AED ' + Math.round(value).toLocaleString(), padding - 10, y + 4);
+        ctx.fillText(config.symbol + convertedValue.toLocaleString(), padding - 10, y + 4);
     }
 }
 
@@ -380,7 +472,7 @@ function displayKeywordResults(results, container) {
                 <div class="keyword-stats">
                     <span class="volume">${result.volume.toLocaleString()} searches</span>
                     <span class="competition ${competitionClass}">${result.competition}</span>
-                    <span class="cpc">AED ${result.cpc}</span>
+                    <span class="cpc">${currencyConfig[currentCurrency].symbol}${(result.cpc * currencyConfig[currentCurrency].exchangeRate).toFixed(2)}</span>
                 </div>
             </div>
         `;

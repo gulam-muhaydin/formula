@@ -56,7 +56,7 @@
                     </div>
                     <div class="card-content">
                         <div class="profit-display">
-                            <span class="currency">AED</span>
+                            <span class="currency">$</span>
                             <span class="amount" id="hero-profit">2,450</span>
                         </div>
                         <div class="profit-change positive">
@@ -74,31 +74,38 @@
         <div class="container">
             <div class="section-header">
                 <h2>Profit Calculator</h2>
-                <p>Calculate your potential profits with precision using Dirham currency</p>
+                <p>Calculate your potential profits with precision using multiple currencies</p>
+                <div class="currency-selector">
+                    <label for="currency-select">Currency:</label>
+                    <select id="currency-select" onchange="changeCurrency()">
+                        <option value="USD">USD ($)</option>
+                        <option value="AED">AED (د.إ)</option>
+                    </select>
+                </div>
             </div>
             
             <div class="calculator-grid">
                 <div class="calculator-form">
                     <div class="form-group">
-                        <label for="product-cost">Product Cost (AED)</label>
+                        <label for="product-cost">Product Cost (<span class="currency-code">USD</span>)</label>
                         <div class="input-group">
-                            <span class="input-prefix">AED</span>
+                            <span class="input-prefix currency-symbol">$</span>
                             <input type="number" id="product-cost" placeholder="0.00" step="0.01">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="selling-price">Selling Price (AED)</label>
+                        <label for="selling-price">Selling Price (<span class="currency-code">USD</span>)</label>
                         <div class="input-group">
-                            <span class="input-prefix">AED</span>
+                            <span class="input-prefix currency-symbol">$</span>
                             <input type="number" id="selling-price" placeholder="0.00" step="0.01">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="shipping-cost">Shipping Cost (AED)</label>
+                        <label for="shipping-cost">Shipping Cost (<span class="currency-code">USD</span>)</label>
                         <div class="input-group">
-                            <span class="input-prefix">AED</span>
+                            <span class="input-prefix currency-symbol">$</span>
                             <input type="number" id="shipping-cost" placeholder="0.00" step="0.01">
                         </div>
                     </div>
@@ -112,9 +119,9 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="ad-spend">Ad Spend (AED)</label>
+                        <label for="ad-spend">Ad Spend (<span class="currency-code">USD</span>)</label>
                         <div class="input-group">
-                            <span class="input-prefix">AED</span>
+                            <span class="input-prefix currency-symbol">$</span>
                             <input type="number" id="ad-spend" placeholder="0.00" step="0.01">
                         </div>
                     </div>
@@ -135,15 +142,15 @@
                         <h3>Profit Breakdown</h3>
                         <div class="result-item">
                             <span>Revenue:</span>
-                            <span class="result-value" id="revenue">AED 0.00</span>
+                            <span class="result-value" id="revenue"><span class="currency-symbol">$</span>0.00</span>
                         </div>
                         <div class="result-item">
                             <span>Total Costs:</span>
-                            <span class="result-value" id="total-costs">AED 0.00</span>
+                            <span class="result-value" id="total-costs"><span class="currency-symbol">$</span>0.00</span>
                         </div>
                         <div class="result-item highlight">
                             <span>Net Profit:</span>
-                            <span class="result-value" id="net-profit">AED 0.00</span>
+                            <span class="result-value" id="net-profit"><span class="currency-symbol">$</span>0.00</span>
                         </div>
                         <div class="result-item">
                             <span>Profit Margin:</span>
@@ -349,7 +356,7 @@
                     </div>
                     <div class="metric-content">
                         <h3>Total Revenue</h3>
-                        <div class="metric-value">AED <span id="total-revenue">12,450</span></div>
+                        <div class="metric-value"><span class="currency-symbol">$</span><span id="total-revenue">12,450</span></div>
                         <div class="metric-change positive">
                             <i class="fas fa-arrow-up"></i>
                             <span>+8.2%</span>
@@ -363,7 +370,7 @@
                     </div>
                     <div class="metric-content">
                         <h3>Net Profit</h3>
-                        <div class="metric-value">AED <span id="total-profit">3,240</span></div>
+                        <div class="metric-value"><span class="currency-symbol">$</span><span id="total-profit">3,240</span></div>
                         <div class="metric-change positive">
                             <i class="fas fa-arrow-up"></i>
                             <span>+12.5%</span>
